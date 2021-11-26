@@ -14,7 +14,7 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="#" class="d-block">{{ Auth::user()->name ??''}}</a>
             </div>
         </div>
 
@@ -22,21 +22,20 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                <li class="nav-header">EXAMPLES</li>
+                <li class="nav-header">Menu</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            Calendar
-                            <span class="badge badge-info right">2</span>
+                            Dashboard
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/gallery.html" class="nav-link">
+                    <a href=" {{ route('workspace.workspaces') }} " class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                            Gallery
+                            Work Space
                         </p>
                     </a>
                 </li>
@@ -44,13 +43,21 @@
                     <a href="pages/kanban.html" class="nav-link">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
-                            Kanban Board
+                            Histroy
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/kanban.html" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Registry Guest
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Setting
                             <i class="fas fa-angle-left right"></i>
@@ -73,6 +80,18 @@
                             <a href="{{ route('setting.medics') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Medical Management</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('setting.prefix') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Prefix Management</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('setting.type') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Type Management</p>
                             </a>
                         </li>
                     </ul>

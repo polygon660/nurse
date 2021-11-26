@@ -16,6 +16,7 @@ class CreateMedicalsTable extends Migration
         Schema::create('medicals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

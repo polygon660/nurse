@@ -24,6 +24,7 @@ class CreateGuestsTable extends Migration
             $table->integer('room_id')->nullable()->comment('รหัสห้อง');
             $table->integer('level_id')->nullable()->comment('รหัสระดับชั้น');
             $table->integer('program_id')->nullable()->comment('รหัสสาขา');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

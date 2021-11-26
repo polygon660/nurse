@@ -16,6 +16,7 @@ class CreateGuestTypesTable extends Migration
         Schema::create('guest_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

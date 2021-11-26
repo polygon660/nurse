@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class role extends Model
 {
     use HasFactory,SoftDeletes;
+
+    protected $table = 'roles';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
+
 }

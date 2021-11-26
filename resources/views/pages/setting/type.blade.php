@@ -12,12 +12,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Role Management</h1>
+                    <h1 class="m-0">Type Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Role Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Type Management</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,7 +31,7 @@
             <!-- จัดการหน้าที่ -->
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Role Management</h3>
+                    <h3 class="card-title">Type Management</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -39,23 +39,21 @@
                         </button>
                     </div>
                 </div>
-                @livewire('setting.role.show')
                 <!-- /.card-header -->
-                {{-- <div class="card-body">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">ตารางแสดงหน้าที่</h3>
+                                    <h3 class="card-title">ตารางแสดงประเภทผู้เข้าใช้</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="role" class="table table-bordered table-hover">
+                                    <table id="Type" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
-                                                <th class="text-center">ผู้ใช้งาน</th>
-                                                <th class="text-center">หน้าที่</th>
+                                                <th class="text-center">ชื่อประเภทผู้เข้าใช้</th>
                                                 <th class="text-center">จัดการ</th>
                                             </tr>
                                         </thead>
@@ -64,7 +62,6 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Internet Explorer 5.2</td>
-                                                <td>Mac OS 8-X</td>
                                                 <td class="text-center">
 
                                                     <a class="btn btn-info btn-sm" href="#">
@@ -82,7 +79,6 @@
                                             <tr>
                                                 <td>2</td>
                                                 <td>NetFront 3.1</td>
-                                                <td>Embedded devices</td>
                                                 <td class="text-center">
 
                                                     <a class="btn btn-info btn-sm" href="#">
@@ -100,7 +96,7 @@
                                             <tr>
                                                 <td>3</td>
                                                 <td>NetFront 3.4</td>
-                                                <td>Embedded devices</td>
+
                                                 <td class="text-center">
 
                                                     <a class="btn btn-info btn-sm" href="#">
@@ -118,7 +114,7 @@
                                             <tr>
                                                 <td>4</td>
                                                 <td>Dillo 0.8</td>
-                                                <td>Embedded devices</td>
+
                                                 <td class="text-center">
 
                                                     <a class="btn btn-info btn-sm" href="#">
@@ -136,7 +132,6 @@
                                             <tr>
                                                 <td>5</td>
                                                 <td>Links</td>
-                                                <td>Text only</td>
                                                 <td class="text-center">
 
                                                     <a class="btn btn-info btn-sm" href="#">
@@ -154,9 +149,7 @@
                                             <tr>
                                                 <td>6</td>
                                                 <td>Lynx</td>
-                                                <td>Text only</td>
                                                 <td class="text-center">
-
                                                     <a class="btn btn-info btn-sm" href="#">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
@@ -173,10 +166,8 @@
                                         <tfoot>
                                             <tr>
                                                 <th class="text-center">#</th>
-                                                <th class="text-center">ชื่อผู้ใช้งาน</th>
-                                                <th class="text-center">หน้าที่</th>
+                                                <th class="text-center">ชื่อประเภทผู้เข้าใช้</th>
                                                 <th class="text-center">จัดการ</th>
-
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -188,16 +179,16 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">เพิ่มหน้าที่</h3>
+                                    <h3 class="card-title">เพิ่มประเภทผู้เข้าใช้</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">หน้าที่</label>
+                                            <label for="exampleInputEmail1">ประเภทผู้เข้าใช้</label>
                                             <input type="email" class="form-control" id="exampleInputEmail1"
-                                                placeholder="ใส่หน้าที่">
+                                                placeholder="ใส่ชื่อประเภทผู้เข้าใช้">
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -209,13 +200,8 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
-
-
-            <!-- CRUD/หน้าที่ -->
-
-            <!-- /.card -->
         </div>
     </section>
     <!-- /.content -->
@@ -240,9 +226,9 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
     $(function () {
-      $("#role").DataTable({
+      $("#Type").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
-      }).buttons().container().appendTo('#role_wrapper .col-md-6:eq(0)');
+      }).buttons().container().appendTo('#Type_wrapper .col-md-6:eq(0)');
     });
 </script>
 @endsection

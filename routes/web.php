@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('pages.dashboard.dashboard');
@@ -30,4 +30,11 @@ Route::prefix('setting')->name('setting.')->group(function () {
     Route::view('/role', $setting.'role')->name('roles');
     Route::view('/drug', $setting.'drug')->name('drugs');
     Route::view('/medic', $setting.'medic')->name('medics');
+    Route::view('/type', $setting.'type')->name('type');
+    Route::view('/prefix', $setting.'prefix')->name('prefix');
+});
+
+Route::prefix('workspace')->name('workspace.')->group(function () {
+    $workspace = "pages.workspace.";
+    Route::view('/index', $workspace.'workspace')->name('workspaces');
 });
