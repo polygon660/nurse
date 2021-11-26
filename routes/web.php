@@ -19,11 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('pages.dashboard.dashboard');
+// })->name('dashboard');
+
+Route::view('/dashboard', 'pages.dashboard.dashboard')->name('dashboard');
 
 Route::prefix('setting')->name('setting.')->group(function () {
     $setting = "pages.setting.";
     Route::view('/role', $setting.'role')->name('roles');
+    Route::view('/drug', $setting.'drug')->name('drugs');
+    Route::view('/medic', $setting.'medic')->name('medics');
 });

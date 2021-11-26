@@ -14,7 +14,7 @@ class UpdateRoleIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('role_id')->comment('รหัสสิทธิ์การเข้าถึง');
+            $table->integer('role_id')->nullable()->comment('รหัสสิทธิ์การเข้าถึง');
         });
     }
 
