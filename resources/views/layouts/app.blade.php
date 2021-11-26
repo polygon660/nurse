@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    @yield('css')
+    @stack('css')
     @livewireStyles
 
     <!-- Scripts -->
@@ -83,9 +83,34 @@
     @stack('modals') --}}
 
     @livewireScripts
-
-    <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }} "></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        window.addEventListener('swal:modal', event => {
+            swal.fire({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            });
+        });
+
+        window.addEventListener('swal:confirm', event => {
+            swal.fire({
+            title: event.detail.message,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+            }).then((Delete) => {
+            if (Delete) {
+                livewire.emit('delete',event.detail.id);
+            }
+            });
+        });
+
+    </script>
+    <!-- jQuery -->
     <!-- Bootstrap -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
     <!-- overlayScrollbars -->
@@ -94,7 +119,6 @@
     <script src="{{ asset('dist/js/adminlte.js') }} "></script>
 
     <!-- PAGE PLUGINS -->
-
     <!-- jQuery Mapael -->
     <script src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
     <script src="{{ asset('plugins/raphael/raphael.min.js') }} "></script>
@@ -104,7 +128,10 @@
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    @yield('script')
+
+    @stack('script')
+
+
 
 </body>
 

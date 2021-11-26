@@ -73,7 +73,7 @@
                         <li class="nav-item">
                             <a href="{{ route('setting.drugs') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Durg Management</p>
+                                <p>Drug Management</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Setting\Role;
+namespace App\Http\Livewire\Setting\Drug;
 
-use App\Models\role;
 use Livewire\Component;
+use App\Models\medicine as drug;
 
 class Show extends Component
 {
-    public $role_id, $name;
+    public $drug_id, $name;
     public $update;
     protected $Theme = 'bootstrap';
 
@@ -19,14 +19,14 @@ class Show extends Component
     ];
 
     protected $messages = [
-        'name.required' => 'กรุณาตั้งชื่อหน้าที่',
+        'name.required' => 'กรุณาตั้งชื่อยา',
     ];
 
     public function edit($id)
     {
 
-        $item = role::findOrFail($id);
-        $this->role_id = $item->id;
+        $item = drug::findOrFail($id);
+        $this->drug_id = $item->id;
         $this->name = $item->name;
         $this->update = true;
     }
@@ -34,9 +34,9 @@ class Show extends Component
     public function delete($id)
     {
 
-        role::find($id)->delete();
+        drug::find($id)->delete();
 
-        return redirect()->to('setting/role')->with('message', 'ข้อมูลถูกลบเรียบร้อย');
+        return redirect()->to('setting/drug')->with('message', 'ข้อมูลถูกลบเรียบร้อย');
     }
 
     public function confirmDelete($id)
@@ -55,8 +55,8 @@ class Show extends Component
         $this->validate();
         try {
 
-            role::updateOrCreate(
-                ['id' => $this->role_id],
+            drug::updateOrCreate(
+                ['id' => $this->drug_id],
                 ['name' => $this->name]
             );
 
@@ -69,7 +69,7 @@ class Show extends Component
             $this->update = false;
 
             $this->reset();
-            session()->flash('message', 'อัพเดทชื่อหน้าที่สำเร็จ!');
+            session()->flash('message', 'อัพเดทชื่อยาสำเร็จ!');
             session()->flash('alert-class', 'alert-success');
         } catch (\Exception $e) {
             session()->flash('message', 'อัพเดทผิดพลาด!' . $e);
@@ -80,9 +80,10 @@ class Show extends Component
 
     public function render()
     {
-        $role = role::all();
-        return view('livewire.setting.role.show')->with([
-            'role' => $role
+        $drug = drug::all();
+        return view('livewire.setting.drug.show')->with([
+            'drug' => $drug
         ]);
     }
+
 }

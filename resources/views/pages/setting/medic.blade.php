@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('css')
+@push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-@endsection
+@endpush
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -213,7 +213,7 @@
 </div>
 
 @endsection
-@section('script')
+@push('script')
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
 <!-- DataTables  & Plugins -->
@@ -236,4 +236,4 @@
       }).buttons().container().appendTo('#Medical_wrapper .col-md-6:eq(0)');
     });
 </script>
-@endsection
+@endpush
