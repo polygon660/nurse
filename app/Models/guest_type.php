@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class guest_type extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'guest_types';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
 }

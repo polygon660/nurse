@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class medical extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'medicals';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
 }

@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class room extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'rooms';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
 }

@@ -4,20 +4,20 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">ตารางแสดงชื่อยา</h3>
+                        <h3 class="card-title">ตารางแสดงชื่อการปฐมพยาบาล</h3>
                     </div>
                     <!-- /.card-header -->
                     <div wire:ignore class="card-body">
-                        <table id="drug" class="table table-bordered table-hover">
+                        <table id="medic" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">ชื่อยา</th>
+                                    <th class="text-center">ชื่อการปฐมพยาบาล</th>
                                     <th class="text-center">จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($drug as $item)
+                                @forelse ($med as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
@@ -44,7 +44,7 @@
                             <tfoot>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">ชื่อยา</th>
+                                    <th class="text-center">ชื่อการปฐมพยาบาล</th>
                                     <th class="text-center">จัดการ</th>
 
                                 </tr>
@@ -58,7 +58,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">เพิ่มชื่อยา</h3>
+                        <h3 class="card-title">เพิ่มชื่อการปฐมพยาบาล</h3>
                     </div>
                     <!-- form start -->
                     @if(Session::has('message'))
@@ -68,9 +68,9 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">ชื่อยา</label>
-                                <input type="hidden" class="form-control" wire:model="drug_id" placeholder="ใส่ชื่อยา">
-                                <input type="text" class="form-control" wire:model="name" placeholder="ใส่ชื่อยา">
+                                <label for="exampleInputEmail1">ชื่อการปฐมพยาบาล</label>
+                                <input type="hidden" class="form-control" wire:model="med_id" placeholder="ใส่ชื่อการปฐมพยาบาล">
+                                <input type="text" class="form-control" wire:model="name" placeholder="ใส่ชื่อการปฐมพยาบาล">
                                 @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror

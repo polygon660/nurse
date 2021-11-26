@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class history extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $table = 'histories';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
+
 }

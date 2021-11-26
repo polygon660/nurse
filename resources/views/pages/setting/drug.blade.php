@@ -66,9 +66,9 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
     $(function () {
-      $("#role").DataTable({
+      $("#drug").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
-      }).buttons().container().appendTo('#role_wrapper .col-md-6:eq(0)');
+      }).buttons().container().appendTo('#drug_wrapper .col-md-6:eq(0)');
     });
 </script>
 @endpush

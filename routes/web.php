@@ -38,3 +38,7 @@ Route::prefix('workspace')->name('workspace.')->group(function () {
     $workspace = "pages.workspace.";
     Route::view('/index', $workspace.'workspace')->name('workspaces');
 });
+Route::prefix('registryguest')->name('registryguest.')->group(function () {
+    $registryguest = "pages.registryguest.";
+    Route::view('/index', $registryguest.'registryguest')->name('registryguests');
+});

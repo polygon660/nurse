@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class prefix extends Model
 {
     use HasFactory,SoftDeletes;
+
+    protected $table = 'prefixes';
+
+    protected $primaryKey = 'id';
+
+    protected $guarded = [];
+
 }

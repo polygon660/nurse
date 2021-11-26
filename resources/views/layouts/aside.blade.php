@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/kanban.html" class="nav-link">
+                    <a href="{{ route('registryguest.registryguests') }}" class="nav-link">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Registry Guest

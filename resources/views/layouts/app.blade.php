@@ -100,10 +100,13 @@
             title: event.detail.message,
             text: event.detail.text,
             icon: event.detail.type,
-            buttons: true,
+
+            showCancelButton: true,
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
             dangerMode: true,
             }).then((Delete) => {
-            if (Delete) {
+            if (Delete.isConfirmed) {
                 livewire.emit('delete',event.detail.id);
             }
             });
