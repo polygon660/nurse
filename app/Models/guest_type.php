@@ -14,4 +14,10 @@ class guest_type extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [];
+
+    public function guest()
+    {
+        return $this->hasMany(guest::class);
+    }
+
 }

@@ -16,4 +16,8 @@ class prefix extends Model
 
     protected $guarded = [];
 
+    public function guest()
+    {
+        return $this->hasMany(guest::class);
+    }
 }

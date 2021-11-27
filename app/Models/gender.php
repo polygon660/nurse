@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class room extends Model
+class gender extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table = 'rooms';
+    protected $table = 'genders';
 
     protected $primaryKey = 'id';
 
