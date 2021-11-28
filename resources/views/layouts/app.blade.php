@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     @stack('css')
     @livewireStyles
 
@@ -112,7 +115,18 @@
 
     @stack('script')
 
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            })
+
+        })
+    </script>
 
 </body>
 

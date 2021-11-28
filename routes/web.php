@@ -40,4 +40,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         $registryguest = "pages.registryguest.";
         Route::view('/index', $registryguest . 'registryguest')->name('registryguests');
     });
+    Route::prefix('historyboard')->name('historyboard.')->group(function () {
+        $historyboard = "pages.historyboard.";
+        Route::view('/index', $historyboard . 'historyboard')->name('historyboard');
+    });
 });

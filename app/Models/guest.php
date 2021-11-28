@@ -32,9 +32,8 @@ class guest extends Model
         return $this->belongsTo(prefix::class);
     }
 
-    public function history()
-    {
-        return $this->hasMany(history::class);
+    public function history(){
+        return  $this->hasMany(history::class, 'guest_id');
     }
 
     public function level()

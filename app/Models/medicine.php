@@ -15,4 +15,9 @@ class medicine extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [];
+
+    public function history()
+    {
+        return $this->hasMany(history::class);
+    }
 }

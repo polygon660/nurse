@@ -20,7 +20,7 @@
                             <div class="col-2">
                                 <label>ประเภทผู้เข้าใช้</label>
                                 <select class="form-control" wire:model="input_type">
-                                    <option selected value="">กรุณาเลือกประเภท</option>
+                                    <option selected >กรุณาเลือกประเภท</option>
                                     @foreach ( $type as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -40,7 +40,7 @@
                             <div class="col-2">
                                 <label>คำนำหน้า</label>
                                 <select wire:model="input_prefix" class="form-control">
-                                    <option selected value="">กรุณาเลือกคำนำหน้า</option>
+                                    <option selected >กรุณาเลือกคำนำหน้า</option>
                                     @foreach ( $prefix as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -65,7 +65,7 @@
                             <div class="col-2">
                                 <label>เพศ</label>
                                 <select wire:model="input_gender" class="form-control">
-                                    <option selected value="">กรุณาเลือกเพศ</option>
+                                    <option selected >กรุณาเลือกเพศ</option>
                                     @foreach ( $gender as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
