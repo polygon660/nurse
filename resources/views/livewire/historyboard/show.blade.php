@@ -29,8 +29,7 @@
                     <td class="text-center">{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
                     <td class="text-center">{{ date('H:i:s', strtotime($item->created_at)) }}</td>
                     <td>
-                        <button wire:click="view({{ $item->guest_id }})" class="btn btn-block btn-info"
-                            data-toggle="modal" data-target="#modal-xl">
+                        <button wire:click="view({{ $item->guest_id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
                             <i class="fas fa-file-alt"></i>
                         </button>
                     </td>
@@ -62,6 +61,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
+                            <u class="ml-2">{{ $guest_id }}</u>
+
                                 <div class="col-3">
                                     <label>ประเภทผู้เข้าใช้</label>
                                     <u class="ml-2">{{ $guest_type }}</u>
@@ -146,8 +147,33 @@
 
                             </div>
                         </div>
-                        {{-- ส่วนตาราง --}}
-                        @include('livewire.historyboard.tablemodal')
+                        {{-- ส่วนตาราง --}} 
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>อาการ</th>
+                                    <th>การปฐมพยาบาล</th>
+                                    <th>ยา</th>
+                                    <th>เข้าใช้งานเมื่อ</th>
+                                    <th>หมายเหตุ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ( $datahistry as $item )
+
+                                <tr>
+                                    <td>{{ $loop->iteration ??''}}</td>
+                                    <td>{{ $item->symptom ??''}}</td>
+                                    <td>{{ $item->medical ??''}}</td>
+                                    <td>{{ $item->medicine ??''}}</td>
+                                    <td>{{ $item->created_at ??''}}</td>
+                                    <td>{{ $item->note ??''}}</td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
