@@ -12,6 +12,8 @@ class Show extends Component
 
     use WithPagination;
 
+    public $search = '';
+
     public $history_data, $guest_id, $history_id, $guest_type, $code, $prefix, $name, $surname, $gender, $level, $room, $program, $weight, $height;
 
     public function view($id)
@@ -43,7 +45,15 @@ class Show extends Component
     public function render()
     {
         return view('livewire.historyboard.show')->with([
-            'data' => history::paginate(10),
+            'data' => history::with(['guest'])
+                ->when($this->search, function ($query) {
+                    return $query->whereHas('guest', function ($query) {
+
+                        return $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orwhere('surname', 'like', '%' . $this->search . '%')
+                            ->orwhere('code', 'like', '%' . $this->search . '%');
+                    });
+                })->paginate(10),
             'datahistry' => history::where('guest_id', $this->guest_id)->paginate(10)
         ]);
     }

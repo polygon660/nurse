@@ -1,5 +1,6 @@
 <div>
     <div class="card-body">
+        <input type="text" class="form-control mb-3" wire:model="search" placeholder="ค้นหาชื่อ, นามสกุล, รหัสประจำตัว">
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
