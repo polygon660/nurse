@@ -15,7 +15,10 @@ class guest extends Model
 
     protected $guarded = [];
 
-
+    public function getFullNameAttribute()
+    {
+        return $this->prefix->name.$this->name . ' ' . $this->surname;
+    }
 
     public function guest_type()
     {
@@ -32,7 +35,8 @@ class guest extends Model
         return $this->belongsTo(prefix::class);
     }
 
-    public function history(){
+    public function history()
+    {
         return  $this->hasMany(history::class, 'guest_id');
     }
 

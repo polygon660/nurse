@@ -112,6 +112,7 @@
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
     @stack('script')
 
@@ -123,7 +124,7 @@
             //Initialize Select2 Elements
             $('.select2bs4').select2({
             theme: 'bootstrap4'
-            })
+            });
 
         })
     </script>

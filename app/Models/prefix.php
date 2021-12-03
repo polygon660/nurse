@@ -20,4 +20,5 @@ class prefix extends Model
     {
         return $this->hasMany(guest::class);
     }
+
 }

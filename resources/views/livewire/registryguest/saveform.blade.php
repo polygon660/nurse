@@ -29,7 +29,56 @@
                                 @error('input_type')<p class="text-danger">{{$message}}</p>@enderror
 
                             </div>
+                            
+                            
+                            <div class="col-2">
+                                <label>คำนำหน้า</label>
+                                <select wire:model="input_prefix" class="form-control">
+                                    <option selected >กรุณาเลือกคำนำหน้า</option>
+                                    @foreach ( $prefix as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('input_prefix')<p class="text-danger">{{$message}}</p>@enderror
 
+                            </div>
+                            <div class="col-3">
+                                <label>ชื่อจริง</label>
+                                <input wire:model="input_name" type="text" class="form-control"
+                                    placeholder="กรอกชื่อจริง">
+                                @error('input_name')<p class="text-danger">{{$message}}</p>@enderror
+
+                            </div>
+                            <div class="col-3">
+                                <label>นามสกุล</label>
+                                <input wire:model="input_surname" type="text" class="form-control"
+                                    placeholder="กรอกนามสกุล">
+                                @error('input_surname')<p class="text-danger">{{$message}}</p>@enderror
+
+                            </div>
+                            <div class="col-2">
+                                <label>เพศ</label>
+                                <select wire:model="input_gender" class="form-control">
+                                    <option selected >กรุณาเลือกเพศ</option>
+                                    @foreach ( $gender as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('input_gender')<p class="text-danger">{{$message}}</p>@enderror
+
+                            </div>
+                            
+                            <div class="col-2">
+                                <label>น้ำหนัก</label>
+                                <input wire:model="input_weight" type="number" class="form-control"
+                                    placeholder="กรอกน้ำหนัก">
+                            </div>
+                            <div class="col-2">
+                                <label>ส่วนสูง</label>
+                                <input wire:model="input_height" type="number" class="form-control"
+                                    placeholder="กรอกส่วนสูง">
+                            </div>
+                            
                             <div class="col-2">
                                 <label>รหัส</label>
                                 <input wire:model="input_code" type="text" class="form-control"
@@ -114,6 +163,7 @@
                                 <input wire:model="input_height" type="number" class="form-control"
                                     placeholder="กรอกส่วนสูง">
                             </div>
+                            
                         </div>
                     </div>
                 </div>
