@@ -25,8 +25,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}"> --}}
     @stack('css')
     @livewireStyles
 
@@ -112,11 +112,11 @@
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
+    {{-- <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script> --}}
 
     @stack('script')
 
-    <script>
+    {{-- <script>
         $(function () {
             //Initialize Select2 Elements
             $('.select2').select2()
@@ -127,7 +127,7 @@
             });
 
         })
-    </script>
+    </script> --}}
 
 </body>
 

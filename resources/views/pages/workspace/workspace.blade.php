@@ -1,10 +1,13 @@
 @extends('layouts.app')
-@section('css')
+@push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-@endsection
+{{-- <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css')}}"> --}}
+{{-- <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}"> --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -48,8 +51,9 @@
 </div>
 
 @endsection
-@section('script')
-<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+@push('script')
+{{-- <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -72,5 +76,6 @@
             "autoWidth": false,
         }).buttons().container().appendTo('#drug_wrapper .col-md-6:eq(0)');
     });
+
 </script>
-@endsection
+@endpush

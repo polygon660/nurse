@@ -5,10 +5,15 @@ namespace App\Http\Livewire\Workspace;
 use App\Models\guest;
 use App\Models\history;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Show extends Component
 {
+    use WithPagination;
+
     public $search = '';
+
+    public $history_data, $history_id, $guest_type, $code, $prefix, $name, $surname, $gender, $level, $room, $program, $weight, $height;
 
     public $select_id, $guest_id, $symptom, $medical, $medicine;
 
@@ -19,16 +24,21 @@ class Show extends Component
         'medicine' => 'required',
     ];
 
-    public function show($id)
+    public function view($id)
     {
-        $key = guest::findOrFail($id);
+        $key = guest::findOrfail($id);
         $this->guest_id = $key->id;
         $this->guest_type = $key->guest_type->name;
-        $this->guest_name = $key->fullname;
-        $this->guest_gender = $key->gender->name;
-        $this->guest_level = $key->level->name;
-        $this->guest_room = $key->room->name;
-        $this->guest_program = $key->program->name;
+        $this->code = $key->code;
+        $this->prefix = $key->prefix->name;
+        $this->name = $key->name;
+        $this->surname = $key->surname;
+        $this->gender = $key->gender->name ?? '';
+        $this->level = $key->level->name ?? '';
+        $this->room = $key->room->name ?? '';
+        $this->program = $key->program->name ?? '';
+        $this->weight = $key->weight;
+        $this->height = $key->height;
     }
 
     public function save()
@@ -48,7 +58,13 @@ class Show extends Component
         return view(
             'livewire.workspace.show',
             [
-                'select' => guest::all()
+                // 'select' => guest::all(),
+                'guest' => guest::when($this->search, function ($query) {
+                    return $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orwhere('surname', 'like', '%' . $this->search . '%')
+                        ->orwhere('code', 'like', '%' . $this->search . '%');
+                })->paginate(10),
+                'datahistry' => history::where('guest_id', $this->guest_id)->paginate(10)
             ]
         );
     }

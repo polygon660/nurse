@@ -18,8 +18,7 @@ class Show extends Component
 
     public function view($id)
     {
-        // dd($id);
-        // GuestInfo
+
         $key = guest::findOrfail($id);
         $this->guest_id = $key->id;
         $this->guest_type = $key->guest_type->name;
@@ -33,13 +32,6 @@ class Show extends Component
         $this->program = $key->program->name ?? '';
         $this->weight = $key->weight;
         $this->height = $key->height;
-
-        // HistoryInfo
-        // $datahistry = history::where('guest_id', $this->guest_id)->paginate(10);
-        // $this->history = history::where('guest_id', $this->guest_id)->paginate(10);
-        // $this->history_data = history::all();
-        // $this->history_data->all();
-        // dd($this->history_data);
     }
 
     public function render()

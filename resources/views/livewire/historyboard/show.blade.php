@@ -20,9 +20,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->guest->prefix->name.$item->guest->name.' '.$item->guest->surname ??''}}</td>
-
                     <td>{{ $item->guest->guest_type->name }}</td>
-
                     <td>{{ $item->symptom }}</td>
                     <td>{{ $item->medical }}</td>
                     <td>{{ $item->medicine }}</td>
@@ -30,7 +28,7 @@
                     <td class="text-center">{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
                     <td class="text-center">{{ date('H:i:s', strtotime($item->created_at)) }}</td>
                     <td>
-                        <button wire:click="view({{ $item->guest_id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
+                        <button wire:click="view({{ $item->id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
                             <i class="fas fa-file-alt"></i>
                         </button>
                     </td>
@@ -148,7 +146,7 @@
 
                             </div>
                         </div>
-                        {{-- ส่วนตาราง --}} 
+                        {{-- ส่วนตาราง --}}
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
