@@ -9,6 +9,7 @@ class Show extends Component
 {
     public $med_id, $name;
     public $update;
+
     protected $Theme = 'bootstrap';
 
     protected $listeners = ['delete'];

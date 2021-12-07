@@ -43,10 +43,10 @@ class Show extends Component
 
     public function save()
     {
-        $this->validate();
+        $validated = $this->validate();
 
         try {
-            history::create();
+            history::create($validated);
             session()->flash('message', 'created!!');
         } catch (\Exception $e) {
             session()->flash('message', 'fail' . $e);

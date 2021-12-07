@@ -60,7 +60,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
-                            <u class="ml-2">{{ $guest_id }}</u>
+                            {{-- <u class="ml-2">{{ $guest_id }}</u> --}}
 
                                 <div class="col-3">
                                     <label>ประเภทผู้เข้าใช้</label>
