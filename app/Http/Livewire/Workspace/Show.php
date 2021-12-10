@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Workspace;
 
 use App\Models\guest;
+use App\Models\guest_type;
 use App\Models\history;
+use App\Models\prefix;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -59,7 +61,7 @@ class Show extends Component
             'livewire.workspace.show',
             [
                 // 'select' => guest::all(),
-                'guest' => guest::when($this->search, function ($query) {
+                'guest' => guest::with(['guest_type','prefix'])->when($this->search, function ($query) {
                     return $query->where('name', 'like', '%' . $this->search . '%')
                         ->orwhere('surname', 'like', '%' . $this->search . '%')
                         ->orwhere('code', 'like', '%' . $this->search . '%');
