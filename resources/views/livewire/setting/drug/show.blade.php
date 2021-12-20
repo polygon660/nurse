@@ -18,23 +18,24 @@
                             </thead>
                             <tbody>
                                 @forelse ($drug as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td class="text-center">
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td class="text-center">
 
-                                        <button class="btn btn-info btn-sm" wire:click="edit({{ $item->id }})">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </button>
-                                        <a class="btn btn-danger btn-sm" wire:click="confirmDelete({{ $item->id }})">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
+                                            <button class="btn btn-info btn-sm" wire:click="edit({{ $item->id }})">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </button>
+                                            <a class="btn btn-danger btn-sm"
+                                                wire:click="confirmDelete({{ $item->id }})">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @empty
 
                                 @endforelse
@@ -61,23 +62,32 @@
                         <h3 class="card-title">เพิ่มชื่อยา</h3>
                     </div>
                     <!-- form start -->
-                    @if(Session::has('message'))
-                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                    @if (Session::has('message'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
+                            {{ Session::get('message') }}</p>
                     @endif
                     <form wire:submit.prevent="save">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ชื่อยา</label>
-                                <input type="hidden" class="form-control" wire:model="drug_id" placeholder="ใส่ชื่อยา">
+                                <input type="hidden" class="form-control" wire:model="drug_id"
+                                    placeholder="ใส่ชื่อยา">
                                 <input type="text" class="form-control" wire:model="name" placeholder="ใส่ชื่อยา">
+
                                 @error('name')
-                                <p class="text-danger">{{ $message }}</p>
+                                    <p class="text-danger">{{ $message }}</p>
                                 @enderror
+
                             </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            @if ($update)
+
+                                <a type=""  wire:click="cancel" class="btn btn-secondary">Cancel</a>
+
+                            @endif
                         </div>
                     </form>
                 </div>

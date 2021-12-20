@@ -78,6 +78,11 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            @if ($update)
+
+                                <a type=""  wire:click="cancel" class="btn btn-secondary">Cancel</a>
+
+                            @endif
                         </div>
                     </form>
                 </div>

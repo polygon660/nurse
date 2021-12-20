@@ -95,6 +95,12 @@
                                 <p>Type Management</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('setting.gender') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Gender Management</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

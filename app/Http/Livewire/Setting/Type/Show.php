@@ -76,6 +76,14 @@ class Show extends Component
             session()->flash('alert-class', 'alert-danger');
         };
     }
+
+    public function cancel()
+    {
+        // $this->update = false;
+        $this->reset();
+    }
+
+
     public function render()
     {
         $type = guest_type::all();

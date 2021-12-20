@@ -30,7 +30,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::view('/medic', $setting . 'medic')->name('medics');
         Route::view('/type', $setting . 'type')->name('type');
         Route::view('/prefix', $setting . 'prefix')->name('prefix');
+        Route::view('/gender', $setting . 'gender')->name('gender');
     });
+
+    // /workspace/index
 
     Route::prefix('workspace')->name('workspace.')->group(function () {
         $workspace = "pages.workspace.";

@@ -19,5 +19,10 @@ class history extends Model
     {
         return $this->belongsTo(guest::class, 'guest_id');
     }
+    public function GetFullNameAttribute(){
+
+        return $this->prefix->name . '' . $this->name . ' ' . $this->surname;
+
+    }
 
 }

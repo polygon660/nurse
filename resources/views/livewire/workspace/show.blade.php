@@ -27,7 +27,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->guest_type->name }}</td>
                                         <td>{{ $item->code ?? '' }}</td>
-                                        <td>{{ $item->prefix->name . '' . $item->name . ' ' . $item->surname }}</td>
+                                        <td>{{ $item->fullname }}</td>
                                         <td>{{ $item->level->name ?? '' }}</td>
                                         <td>{{ $item->room->name ?? '' }}</td>
                                         <td>{{ $item->program->name ?? '' }}</td>
@@ -37,6 +37,7 @@
                                                 data-target="#modal-xl">
                                                 <i class="fas fa-file-alt"></i>
                                             </button>
+
                                             <div wire:ignore.self class="modal fade" id="modal-xl">
                                                 <div class="modal-dialog modal-xl">
                                                     <div class="modal-content">
@@ -51,8 +52,8 @@
                                                             <div class="card-body">
                                                                 <div class="form-group">
                                                                     <div class="row">
-                                                                        <u
-                                                                            class="ml-2">{{ $guest_id }}</u>
+                                                                        {{-- <u
+                                                                            class="ml-2">{{ $guest_id }}</u> --}}
 
                                                                         <div class="col-3">
                                                                             <label>ประเภทผู้เข้าใช้</label>
@@ -160,46 +161,66 @@
                                                                     <div class="card-body">
                                                                         <div class="form-group">
                                                                             <div class="row">
-
-                                                                                <input type="hidden"
-                                                                                    wire:model="guest_id">
-                                                                                <div class="col-3">
-                                                                                    <label>อาการ</label>
-                                                                                    <input type="" class="form-control ml-2">
-                                                                                </div>
-
-                                                                                <div class="col-3">
-                                                                                    <label>การปฐมพยาบาล</label>
-                                                                                    <input wire:model="medical" class="form-control ml-2">
-                                                                                </div>
-                                                                                <div class="col-3">
-                                                                                    <label>ยา</label>
-                                                                                    <input wire:model="medicine" class="form-control ml-2">
-
-                                                                                </div>
-                                                                                <div class="col-2">
-                                                                                    <label>หมายเหตุ</label>
-                                                                                    <input type="" wire:model="note" class="form-control ml-2">
-
-                                                                                </div>
-                                                                                <div class="mt-2">
-
-                                                                                    <button wire:click="save" class="btn btn-info">
-                                                                                        <i class="far fa-save"></i> บันทึก
-                                                                                    </button>
-                                                                                </div>
-                                                                                {{-- <div class="col-2">
-                                                                                    <label>น้ำหนัก</label>
-                                                                                    <input class="form-control ml-2">
-
-                                                                                </div>
-                                                                                <div class="col-2">
-                                                                                    <label>ส่วนสูง</label>
-                                                                                    <input class="form-control ml-2">
-
-                                                                                </div> --}}
+                                                                                <form wire:submit.prevent="save">
+                                                                                    <div class="modal-body">
+                                                                                        <div class="card-body">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
 
 
+
+                                                                                                        {{-- <label>รหัส</label> --}}
+                                                                                                        <input wire:model="guest_id" type="hidden" class="form-control"
+                                                                                                            placeholder="กรอกรหัสประจำตัว">
+                                                                                                        {{-- @error('guest_id')<p class="text-danger">{{$message}}</p>
+                                                                                                        @enderror --}}
+
+
+
+                                                                                                    <div class="col-4">
+                                                                                                        <label>อาการ</label>
+                                                                                                        <input wire:model="symptom" type="text" class="form-control"
+                                                                                                            placeholder="กรอกอาการ">
+                                                                                                        @error('symptom')<p class="text-danger">{{$message}}</p>
+                                                                                                        @enderror
+
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        <label>การปฐมพยาบาล</label>
+                                                                                                        <input wire:model="medical" type="text"
+                                                                                                            class="form-control" placeholder="กรอกการปฐมพยาบาล">
+                                                                                                        @error('medical')<p class="text-danger">{{$message}}</p>
+                                                                                                        @enderror
+
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        <label>กรอกยาที่ใช้</label>
+                                                                                                        <input wire:model="medicine" type="text"
+                                                                                                            class="form-control" placeholder="กรอกกรอกยาที่ใช้">
+                                                                                                        @error('medicine')<p class="text-danger">{{$message}}</p>
+                                                                                                        @enderror
+
+                                                                                                    </div>
+                                                                                                    <div class="col-4">
+                                                                                                        <label>หมายเหตุ</label>
+                                                                                                        <input wire:model="note" type="text"
+                                                                                                            class="form-control" placeholder="กรอกหมายเหตุ">
+                                                                                                        @error('note')<p class="text-danger">{{$message}}</p>
+                                                                                                        @enderror
+
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!-- /.card-body -->
+
+                                                                                    </div>
+                                                                                    <div class="modal-footer justify-content-between">
+                                                                                        <button type="button" class="btn btn-default"
+                                                                                            data-dismiss="modal">Close</button>
+                                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                                    </div>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -212,7 +233,7 @@
                                                                             <th>อาการ</th>
                                                                             <th>การปฐมพยาบาล</th>
                                                                             <th>ยา</th>
-                                                                            <th>เข้าใช้งานเมื่อ</th>
+                                                                            <th>บันทึกเมื่อ</th>
                                                                             <th>หมายเหตุ</th>
                                                                         </tr>
                                                                     </thead>
@@ -243,12 +264,76 @@
                                                 </div>
                                                 <!-- /.modal-dialog -->
                                             </div>
+                                            {{-- <form wire:submit.prevent="save">
+                                                            <div class="modal-body">
+                                                                <div class="card-body">
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+
+
+                                                                            <div class="col-4">
+                                                                                <label>รหัส</label>
+                                                                                <input wire:model="guest_id" type="text" class="form-control"
+                                                                                    placeholder="กรอกรหัสประจำตัว">
+                                                                                @error('guest_id')<p class="text-danger">{{$message}}</p>
+                                                                                @enderror
+
+                                                                            </div>
+
+                                                                            <div class="col-4">
+                                                                                <label>อาการ</label>
+                                                                                <input wire:model="symptom" type="text" class="form-control"
+                                                                                    placeholder="กรอกอาการ">
+                                                                                @error('symptom')<p class="text-danger">{{$message}}</p>
+                                                                                @enderror
+
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <label>การปฐมพยาบาล</label>
+                                                                                <input wire:model="medical" type="text"
+                                                                                    class="form-control" placeholder="กรอกการปฐมพยาบาล">
+                                                                                @error('medical')<p class="text-danger">{{$message}}</p>
+                                                                                @enderror
+
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <label>กรอกยาที่ใช้</label>
+                                                                                <input wire:model="medicine" type="text"
+                                                                                    class="form-control" placeholder="กรอกกรอกยาที่ใช้">
+                                                                                @error('medicine')<p class="text-danger">{{$message}}</p>
+                                                                                @enderror
+
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <label>หมายเหตุ</label>
+                                                                                <input wire:model="note" type="text"
+                                                                                    class="form-control" placeholder="กรอกหมายเหตุ">
+                                                                                @error('note')<p class="text-danger">{{$message}}</p>
+                                                                                @enderror
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.card-body -->
+
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                </form> --}}
                                         </td>
                                     </tr>
                                 @empty
 
 
-                                    <p>ไม่พบข้อมูลประวัติ</p>
+
+
+                                    <td>ไม่พบข้อมูล</td>
+
+
 
 
                                 @endforelse

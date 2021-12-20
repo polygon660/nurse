@@ -28,7 +28,7 @@
                     <td class="text-center">{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
                     <td class="text-center">{{ date('H:i:s', strtotime($item->created_at)) }}</td>
                     <td>
-                        <button wire:click="view({{ $item->id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
+                        <button wire:click="show({{ $item->guest_id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
                             <i class="fas fa-file-alt"></i>
                         </button>
                     </td>

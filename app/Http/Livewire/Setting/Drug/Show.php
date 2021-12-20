@@ -77,6 +77,11 @@ class Show extends Component
         };
     }
 
+    public function cancel()
+    {
+        // $this->update = false;
+        $this->reset();
+    }
 
     public function render()
     {

@@ -2,7 +2,7 @@
     @if(Session::has('message'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
     @endif
-    <table id="history" class="table table-bordered table-hover">
+    <table id="history" class="table table-hover">
         <thead>
             <tr>
                 <th class="text-center">#</th>
@@ -49,136 +49,217 @@
             @endforelse
 
 <!-- /.modal -->
-<div class="modal fade" wire:ignore.self id="modal-lg">
-    <div class="modal-dialog modal-lg">
+<div wire:ignore.self class="modal fade" id="modal-xl">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">แก้ไขผู้เข้าใช้</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title">แสดงข้อมูลผู้เข้าใช้</h4>
+                <button type="button" class="close"
+                    data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form wire:submit.prevent="save">
-                <div class="modal-body">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-4">
-                                    <label>ประเภทผู้เข้าใช้</label>
-                                    <select class="form-control" wire:model="input_type">
-                                        <option selected value="">กรุณาเลือกประเภท</option>
-                                        @foreach ( $type as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <u
+                                class="ml-2">{{ $guest_id }}</u>
 
-                                    </select>
-                                    @error('input_type')<p class="text-danger">{{$message}}</p>
-                                    @enderror
+                            <div class="col-3">
+                                <label>ประเภทผู้เข้าใช้</label>
+                                <u
+                                    class="ml-2">{{ $guest_type }}</u>
+                            </div>
+                            @if ($guest_type == 'บุคคลภายนอก')
 
-                                </div>
 
-                                <div class="col-4">
-                                    <label>รหัส</label>
-                                    <input wire:model="input_code" type="text" class="form-control"
-                                        placeholder="กรอกรหัสประจำตัว">
-                                    @error('input_code')<p class="text-danger">{{$message}}</p>
-                                    @enderror
-
-                                </div>
-                                <div class="col-4">
-                                    <label>คำนำหน้า</label>
-                                    <select wire:model="input_prefix" class="form-control">
-                                        <option selected value="">กรุณาเลือกคำนำหน้า</option>
-                                        @foreach ( $prefix as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('input_prefix')<p class="text-danger">{{$message}}</p>
-                                    @enderror
-
-                                </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <label>ชื่อจริง</label>
-                                    <input wire:model="input_name" type="text" class="form-control"
-                                        placeholder="กรอกชื่อจริง">
-                                    @error('input_name')<p class="text-danger">{{$message}}</p>
-                                    @enderror
-
+                                    <u
+                                        class="ml-2">{{ $prefix . $name }}</u>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <label>นามสกุล</label>
-                                    <input wire:model="input_surname" type="text"
-                                        class="form-control" placeholder="กรอกนามสกุล">
-                                    @error('input_surname')<p class="text-danger">{{$message}}</p>
-                                    @enderror
+                                    <u
+                                        class="ml-2">{{ $surname }}</u>
 
                                 </div>
-                                <div class="col-4">
+                                <div class="col-2">
                                     <label>เพศ</label>
-                                    <select wire:model="input_gender" class="form-control">
-                                        <option selected value="">กรุณาเลือกเพศ</option>
-                                        @foreach ( $gender as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('input_gender')<p class="text-danger">{{$message}}</p>
-                                    @enderror
+                                    <u
+                                        class="ml-2">{{ $gender }}</u>
 
                                 </div>
-                                <div class="col-4">
-                                    <label>ระดับชั้น</label>
-                                    <select wire:model="input_level" class="form-control">
-                                        <option selected value="">กรุณาเลือกระดับชั้น</option>
-                                        @foreach ( $level as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
 
-                                </div>
-                                <div class="col-4">
-                                    <label>ห้อง</label>
-                                    <select wire:model="input_room" class="form-control">
-                                        <option selected value="">กรุณาเลือกห้อง</option>
-                                        @foreach ( $room as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="col-4">
-                                    <label>สาขา</label>
-                                    <select wire:model="input_program" class="form-control">
-                                        <option selected value="">กรุณาเลือกสาขา</option>
-                                        @foreach ( $program as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="col-4">
+                                <div class="col-2">
                                     <label>น้ำหนัก</label>
-                                    <input wire:model="input_weight" type="number"
-                                        class="form-control" placeholder="กรอกน้ำหนัก">
+                                    <u
+                                        class="ml-2">{{ $weight }}</u>
+
                                 </div>
-                                <div class="col-4">
+                                <div class="col-2">
                                     <label>ส่วนสูง</label>
-                                    <input wire:model="input_height" type="number"
-                                        class="form-control" placeholder="กรอกส่วนสูง">
+                                    <u
+                                        class="ml-2">{{ $height }}</u>
+
+                                </div>
+
+                            @else
+                                <div class="col-2">
+                                    <label>รหัส</label>
+                                    <u
+                                        class="ml-2">{{ $code }}</u>
+                                </div>
+
+                                <div class="col-3">
+                                    <label>ชื่อจริง</label>
+                                    <u
+                                        class="ml-2">{{ $prefix . $name }}</u>
+                                </div>
+                                <div class="col-3">
+                                    <label>นามสกุล</label>
+                                    <u
+                                        class="ml-2">{{ $surname }}</u>
+
+                                </div>
+                                <div class="col-2">
+                                    <label>เพศ</label>
+                                    <u
+                                        class="ml-2">{{ $gender }}</u>
+
+                                </div>
+                                <div class="col-2">
+                                    <label>ระดับชั้น</label>
+                                    <u
+                                        class="ml-2">{{ $level }}</u>
+
+                                </div>
+                                <div class="col-2">
+                                    <label>ห้อง</label>
+                                    <u
+                                        class="ml-2">{{ $room }}</u>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <label>สาขา</label>
+                                    <u
+                                        class="ml-2">{{ $program }}</u>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <label>น้ำหนัก</label>
+                                    <u
+                                        class="ml-2">{{ $weight }}</u>
+
+                                </div>
+                                <div class="col-2">
+                                    <label>ส่วนสูง</label>
+                                    <u
+                                        class="ml-2">{{ $height }}</u>
+
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>กรอกประวัติ</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <form wire:submit.prevent="save"></form>
+                                    <input type="hidden"
+                                        wire:model="guest_id">
+                                    <div class="col-3">
+                                        <label>อาการ</label>
+                                        <input type="text" wire:model="symptom"
+                                            class="form-control ml-2">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label>การปฐมพยาบาล</label>
+                                        <input type="text" wire:model="medical"
+                                            class="form-control ml-2">
+                                    </div>
+                                    <div class="col-3">
+                                        <label>ยา</label>
+                                        <input type="text" wire:model="medicine"
+                                            class="form-control ml-2">
+
+                                    </div>
+                                    <div class="col-2">
+                                        <label>หมายเหตุ</label>
+                                        <input type="text" wire:model="note"
+                                            class="form-control ml-2">
+
+                                    </div>
+                                    <div class="mt-2">
+
+                                        <button type="submit"
+                                            class="btn btn-info">
+                                            <i class="far fa-save"></i>
+                                            บันทึก
+                                        </button>
+                                    </div>
+                                    {{-- <div class="col-2">
+                                        <label>น้ำหนัก</label>
+                                        <input class="form-control ml-2">
+
+                                    </div>
+                                    <div class="col-2">
+                                        <label>ส่วนสูง</label>
+                                        <input class="form-control ml-2">
+
+                                    </div> --}}
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.card-body -->
+                    {{-- ส่วนตาราง --}}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>อาการ</th>
+                                <th>การปฐมพยาบาล</th>
+                                <th>ยา</th>
+                                <th>เข้าใช้งานเมื่อ</th>
+                                <th>หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($datahistry as $item)
 
+                                <tr>
+                                    <td>{{ $loop->iteration ?? '' }}</td>
+                                    <td>{{ $item->symptom ?? '' }}</td>
+                                    <td>{{ $item->medical ?? '' }}</td>
+                                    <td>{{ $item->medicine ?? '' }}</td>
+                                    <td>{{ $item->created_at ?? '' }}
+                                    </td>
+                                    <td>{{ $item->note ?? '' }}</td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default"
-                        data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default"
+                    data-dismiss="modal">Close</button>
+            </div>
         </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
         </tbody>

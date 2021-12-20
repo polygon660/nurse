@@ -16,7 +16,7 @@ class Show extends Component
 
     public $history_data, $guest_id, $history_id, $guest_type, $code, $prefix, $name, $surname, $gender, $level, $room, $program, $weight, $height;
 
-    public function view($id)
+    public function show($id)
     {
 
         $key = guest::findOrfail($id);

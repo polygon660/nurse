@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Setting\Prefix;
+namespace App\Http\Livewire\Setting\Gender;
 
-use App\Models\prefix;
+use App\Models\gender;
 use Livewire\Component;
 
 class Show extends Component
 {
-    public $pre_id, $name;
+
+    public $gender_id, $name;
     public $update;
     protected $Theme = 'bootstrap';
 
@@ -25,8 +26,8 @@ class Show extends Component
     public function edit($id)
     {
 
-        $item = prefix::findOrFail($id);
-        $this->pre_id = $item->id;
+        $item = gender::findOrFail($id);
+        $this->gender_id = $item->id;
         $this->name = $item->name;
         $this->update = true;
     }
@@ -34,9 +35,9 @@ class Show extends Component
     public function delete($id)
     {
 
-        prefix::find($id)->delete();
+        gender::find($id)->delete();
 
-        return redirect()->to('setting/prefix')->with('message', 'ข้อมูลถูกลบเรียบร้อย');
+        return redirect()->to('setting/gender')->with('message', 'ข้อมูลถูกลบเรียบร้อย');
     }
 
     public function confirmDelete($id)
@@ -55,8 +56,8 @@ class Show extends Component
         $this->validate();
         try {
 
-            prefix::updateOrCreate(
-                ['id' => $this->pre_id],
+            gender::updateOrCreate(
+                ['id' => $this->gender_id],
                 ['name' => $this->name]
             );
 
@@ -83,11 +84,13 @@ class Show extends Component
         $this->reset();
     }
 
+
     public function render()
     {
-        $prefix = prefix::all();
-        return view('livewire.setting.prefix.show')->with([
-            'prefix' => $prefix
+        $gender = gender::all();
+        return view('livewire.setting.gender.show')
+        ->with([
+            'gender' => $gender
         ]);
     }
 }
