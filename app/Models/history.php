@@ -19,10 +19,24 @@ class history extends Model
     {
         return $this->belongsTo(guest::class, 'guest_id');
     }
-    public function GetFullNameAttribute(){
+    public function GetFullNameAttribute()
+    {
 
         return $this->prefix->name . '' . $this->name . ' ' . $this->surname;
-
     }
 
+    public function DateThai($strDate)
+    {
+        $strYear = date("Y", strtotime($strDate)) + 543;
+        $strMonth = date("n", strtotime($strDate));
+        $strDay = date("d", strtotime($strDate));
+        $strtime = date("h:i:s", strtotime($strDate));
+        $strMonthCut = ["", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+        $strMonthThai = $strMonthCut[$strMonth];
+        return $strDay . " " . $strMonthThai . " " . $strYear . " เวลา " . $strtime;
+    }
+
+    protected $casts = [
+        'medical' => 'array',
+    ];
 }

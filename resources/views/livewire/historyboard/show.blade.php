@@ -17,26 +17,33 @@
             </thead>
             <tbody>
                 @forelse ( $data as $item )
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->guest->prefix->name.$item->guest->name.' '.$item->guest->surname ??''}}</td>
-                    <td>{{ $item->guest->guest_type->name }}</td>
-                    <td>{{ $item->symptom }}</td>
-                    <td>{{ $item->medical }}</td>
-                    <td>{{ $item->medicine }}</td>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->guest->prefix->name . $item->guest->name . ' ' . $item->guest->surname ?? '' }}
+                        </td>
+                        <td>{{ $item->guest->guest_type->name }}</td>
+                        <td>{{ $item->symptom }}</td>
+                        {{-- <td>{{ $item->medical }}</td> --}}
+                        <td>
+                            @foreach ($item->medical as $items)
+                                {{ $items }}
+                            @endforeach
+                        </td>
+                        <td>{{ $item->medicine }}</td>
 
-                    <td class="text-center">{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
-                    <td class="text-center">{{ date('H:i:s', strtotime($item->created_at)) }}</td>
-                    <td>
-                        <button wire:click="show({{ $item->guest_id }})" class="btn btn-block btn-info"s data-toggle="modal" data-target="#modal-xl">
-                            <i class="fas fa-file-alt"></i>
-                        </button>
-                    </td>
-                </tr>
+                        <td class="text-center">{{ date('d-M-Y', strtotime($item->created_at)) }}</td>
+                        <td class="text-center">{{ date('H:i:s', strtotime($item->created_at)) }}</td>
+                        <td>
+                            <button wire:click="show({{ $item->guest_id }})" class="btn btn-block btn-info" s
+                                data-toggle="modal" data-target="#modal-xl">
+                                <i class="fas fa-file-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
                 @empty
 
 
-                <p>ไม่พบข้อมูลประวัติ</p>
+                    <p>ไม่พบข้อมูลประวัติ</p>
 
 
                 @endforelse
@@ -60,88 +67,143 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
-                            {{-- <u class="ml-2">{{ $guest_id }}</u> --}}
+                                {{-- <u class="ml-2">{{ $guest_id }}</u> --}}
 
                                 <div class="col-3">
                                     <label>ประเภทผู้เข้าใช้</label>
                                     <u class="ml-2">{{ $guest_type }}</u>
                                 </div>
-                                @if ( $guest_type == 'บุคคลภายนอก' )
+                                @if ($guest_type == 'บุคคลภายนอก')
+                                    <div class="col-3">
+                                        <label>ชื่อจริง</label>
+                                        <u class="ml-2">{{ $prefix . $name }}</u>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>นามสกุล</label>
+                                        <u class="ml-2">{{ $surname }}</u>
 
+                                    </div>
+                                    <div class="col-2">
+                                        <label>เพศ</label>
+                                        <u class="ml-2">{{ $gender }}</u>
 
-                                <div class="col-3">
-                                    <label>ชื่อจริง</label>
-                                    <u class="ml-2">{{ $prefix.$name }}</u>
-                                </div>
-                                <div class="col-3">
-                                    <label>นามสกุล</label>
-                                    <u class="ml-2">{{ $surname }}</u>
+                                    </div>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>เพศ</label>
-                                    <u class="ml-2">{{ $gender }}</u>
+                                    <div class="col-2">
+                                        <label>น้ำหนัก</label>
+                                        <u class="ml-2">{{ $weight }}</u>
 
-                                </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>ส่วนสูง</label>
+                                        <u class="ml-2">{{ $height }}</u>
 
-                                <div class="col-2">
-                                    <label>น้ำหนัก</label>
-                                    <u class="ml-2">{{ $weight }}</u>
+                                    </div>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>ส่วนสูง</label>
-                                    <u class="ml-2">{{ $height }}</u>
+                                    <div class="col-2">
+                                        <label>ค่า BMI</label>
+                                        @php
+                                            $h = $height / 100;
+                                            $h1 = $h ^ 2;
+                                            $i = $weight / $h1;
+                                        @endphp
+                                        <u class="ml-2">{{ $i }}</u>
 
-                                </div>
+                                    </div>
 
+                                    <div class="col-2">
+                                        <label>อยู่ในเกณท์</label>
+                                        @if ($i < 18.5)
+                                            <u class="ml-2">น้ำหนักต่ำกว่าปกติ</u>
+                                        @elseif ($i >= 18.5)
+                                            <u class="ml-2">สมส่วน</u>
+                                        @elseif($i >= 23)
+                                            <u class="ml-2">น้ำหนักเกิน</u>
+                                        @elseif($i >= 25)
+                                            <u class="ml-2">โรคอ้วน</u>
+                                        @elseif($i >= 30)
+                                            <u class="ml-2">โรคอ้วนอันตราย</u>
+                                        @else
+                                            <u class="ml-2">ไม่สามารถคำนวนได้</u>
+                                        @endif
+
+                                    </div>
                                 @else
-                                <div class="col-2">
-                                    <label>รหัส</label>
-                                    <u class="ml-2">{{ $code }}</u>
-                                </div>
+                                    <div class="col-2">
+                                        <label>รหัส</label>
+                                        <u class="ml-2">{{ $code }}</u>
+                                    </div>
 
-                                <div class="col-3">
-                                    <label>ชื่อจริง</label>
-                                    <u class="ml-2">{{ $prefix.$name }}</u>
-                                </div>
-                                <div class="col-3">
-                                    <label>นามสกุล</label>
-                                    <u class="ml-2">{{ $surname }}</u>
+                                    <div class="col-3">
+                                        <label>ชื่อจริง</label>
+                                        <u class="ml-2">{{ $prefix . $name }}</u>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>นามสกุล</label>
+                                        <u class="ml-2">{{ $surname }}</u>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>เพศ</label>
-                                    <u class="ml-2">{{ $gender }}</u>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>เพศ</label>
+                                        <u class="ml-2">{{ $gender }}</u>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>ระดับชั้น</label>
-                                    <u class="ml-2">{{ $level }}</u>
+                                    </div>
+                                    {{-- <div class="col-2">
+                                        <label>ระดับชั้น</label>
+                                        <u class="ml-2">{{ $level }}</u>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>ห้อง</label>
-                                    <u class="ml-2">{{ $room }}</u>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>ห้อง</label>
+                                        <u class="ml-2">{{ $room }}</u>
 
-                                </div>
+                                    </div>
 
-                                <div class="col-2">
-                                    <label>สาขา</label>
-                                    <u class="ml-2">{{ $program }}</u>
+                                    <div class="col-2">
+                                        <label>สาขา</label>
+                                        <u class="ml-2">{{ $program }}</u>
 
-                                </div>
+                                    </div> --}}
 
-                                <div class="col-2">
-                                    <label>น้ำหนัก</label>
-                                    <u class="ml-2">{{ $weight }}</u>
+                                    <div class="col-2">
+                                        <label>น้ำหนัก</label>
+                                        <u class="ml-2">{{ $weight }}</u>
 
-                                </div>
-                                <div class="col-2">
-                                    <label>ส่วนสูง</label>
-                                    <u class="ml-2">{{ $height }}</u>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>ส่วนสูง</label>
+                                        <u class="ml-2">{{ $height }}</u>
 
-                                </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <label>ค่า BMI</label>
+                                        @php
+                                            $h = $height / 100;
+                                            $h1 = $h ^ 2;
+                                            $i = $weight / $h1;
+                                        @endphp
+                                        <u class="ml-2">{{ $i }}</u>
+
+                                    </div>
+
+                                    <div class="col-2">
+                                        <label>อยู่ในเกณท์</label>
+                                        @if ($i < 18.5)
+                                            <u class="ml-2">น้ำหนักต่ำกว่าปกติ</u>
+                                        @elseif ($i >= 18.5)
+                                            <u class="ml-2">สมส่วน</u>
+                                        @elseif($i >= 23)
+                                            <u class="ml-2">น้ำหนักเกิน</u>
+                                        @elseif($i >= 25)
+                                            <u class="ml-2">โรคอ้วน</u>
+                                        @elseif($i >= 30)
+                                            <u class="ml-2">โรคอ้วนอันตราย</u>
+                                        @else
+                                            <u class="ml-2">ไม่สามารถคำนวนได้</u>
+                                        @endif
+
+                                    </div>
                                 @endif
 
                             </div>
@@ -159,16 +221,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $datahistry as $item )
-
-                                <tr>
-                                    <td>{{ $loop->iteration ??''}}</td>
-                                    <td>{{ $item->symptom ??''}}</td>
-                                    <td>{{ $item->medical ??''}}</td>
-                                    <td>{{ $item->medicine ??''}}</td>
-                                    <td>{{ $item->created_at ??''}}</td>
-                                    <td>{{ $item->note ??''}}</td>
-                                </tr>
+                                @foreach ($datahistry as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration ?? '' }}</td>
+                                        <td>{{ $item->symptom ?? '' }}</td>
+                                        <td>
+                                            @foreach ($item->medical as $items)
+                                                {{ $items }}
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $item->medicine ?? '' }}</td>
+                                        <td>{{ $item->created_at ?? '' }}</td>
+                                        <td>{{ $item->note ?? '' }}</td>
+                                    </tr>
                                 @endforeach
 
                             </tbody>

@@ -17,7 +17,7 @@ class guest extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->prefix->name.$this->name . ' ' . $this->surname;
+        return $this->prefix->name . $this->name . ' ' . $this->surname;
     }
 
     public function guest_type()
@@ -55,6 +55,11 @@ class guest extends Model
         return $this->belongsTo(program::class);
     }
 
+    // public function students()
+    // {
+    //     // return $this->belongsTo(Students::class, 'student_id', 'id');
+    //     return $this->belongsTo('App\Models\Register\Students', 'student_id', 'register_id');
+    // }
     // public function role()
     // {
     //     return $this->hasOne(role::class);

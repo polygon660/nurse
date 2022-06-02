@@ -40,12 +40,12 @@ class Show extends Component
         $this->updateMode = true;
         $item = guest::findOrFail($id);
         $this->guest_id = $item->id;
-        $this->guest_type = $item->guest_type_id;
+        $this->guest_type = $item->guest_type->name;
         $this->code = $item->code;
         $this->prefix = $item->prefix_id;
         $this->name = $item->name;
         $this->surname = $item->surname;
-        $this->gender = $item->gender_id;
+        $this->gender = $item->gender->name;
         $this->level = $item->level_id;
         $this->room = $item->room_id;
         $this->program = $item->program_id;
@@ -74,11 +74,11 @@ class Show extends Component
                 'height' => $this->height,
             ]);
             $this->reset();
-            // $this->dispatchBrowserEvent('swal:modal', [
-            //     'type' => 'success',
-            //     'title' => 'สำเร็จ!!',
-            //     'text' => 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว'
-            // ]);
+            $this->dispatchBrowserEvent('swal:modal', [
+                'type' => 'success',
+                'title' => 'สำเร็จ!!',
+                'text' => 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว'
+            ]);
             $this->updateMode = false;
             return redirect()->to('registryguest/index')->with('message', 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว');
 
@@ -96,6 +96,8 @@ class Show extends Component
     {
 
             guest::where('id', $id)->delete();
+            history::where('guest_id',$id)->delete();
+
 
             return redirect()->to('registryguest/index')->with('message', 'ข้อมูลถูกลบเรียบร้อย');
             // session()->flash('message', 'Users Deleted Successfully.');

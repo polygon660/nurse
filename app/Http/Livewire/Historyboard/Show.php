@@ -18,6 +18,7 @@ class Show extends Component
 
     public function show($id)
     {
+        // dd($id);
 
         $key = guest::findOrfail($id);
         $this->guest_id = $key->id;
@@ -32,7 +33,9 @@ class Show extends Component
         $this->program = $key->program->name ?? '';
         $this->weight = $key->weight;
         $this->height = $key->height;
+
     }
+
 
     public function render()
     {

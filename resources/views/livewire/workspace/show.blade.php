@@ -8,6 +8,10 @@
                     <div class="card-body">
                         <input type="text" class="form-control mb-3" wire:model="search"
                             placeholder="ค้นหาชื่อ, นามสกุล, รหัสประจำตัว">
+                        <a href="#" wire:click="export()" class="btn btn-success mb-3">
+                            EXCEL
+                        </a>
+                        @if ( $search )
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -15,9 +19,9 @@
                                     <th class="text-center">ประเภทผู้เข้าใช้</th>
                                     <th class="text-center">รหัส</th>
                                     <th class="text-center">ชื่อ-สกุล</th>
-                                    <th class="text-center">ระดับชั้น</th>
+                                    {{-- <th class="text-center">ระดับชั้น</th>
                                     <th class="text-center">ห้อง</th>
-                                    <th class="text-center">สาขา</th>
+                                    <th class="text-center">สาขา</th> --}}
                                     <th class="text-center">จัดการ</th>
                                 </tr>
                             </thead>
@@ -28,9 +32,9 @@
                                         <td>{{ $item->guest_type->name }}</td>
                                         <td>{{ $item->code ?? '' }}</td>
                                         <td>{{ $item->fullname }}</td>
-                                        <td>{{ $item->level->name ?? '' }}</td>
+                                        {{-- <td>{{ $item->level->name ?? '' }}</td>
                                         <td>{{ $item->room->name ?? '' }}</td>
-                                        <td>{{ $item->program->name ?? '' }}</td>
+                                        <td>{{ $item->program->name ?? '' }}</td> --}}
                                         <td>
                                             <button wire:click="view({{ $item->id }})"
                                                 class="btn btn-block btn-info" s data-toggle="modal"
@@ -61,8 +65,6 @@
                                                                                 class="ml-2">{{ $guest_type }}</u>
                                                                         </div>
                                                                         @if ($guest_type == 'บุคคลภายนอก')
-
-
                                                                             <div class="col-3">
                                                                                 <label>ชื่อจริง</label>
                                                                                 <u
@@ -93,7 +95,42 @@
                                                                                     class="ml-2">{{ $height }}</u>
 
                                                                             </div>
+                                                                            <div class="col-2">
+                                                                                <label>ค่า BMI</label>
+                                                                                @php
+                                                                                    $h = $height / 100;
+                                                                                    $h1 = $h ^ 2;
+                                                                                    // $h1 = 30;
+                                                                                    $i = $weight / $h1;
+                                                                                @endphp
+                                                                                <u
+                                                                                    class="ml-2">{{ $i }}</u>
 
+                                                                            </div>
+
+                                                                            <div class="col-2">
+                                                                                <label>อยู่ในเกณท์</label>
+                                                                                @if ($i < 18.5)
+                                                                                    <u
+                                                                                        class="ml-2">น้ำหนักต่ำกว่าปกติ</u>
+                                                                               @elseif ($i > 18.5)
+                                                                                    <u
+                                                                                        class="ml-2">สมส่วน</u>
+                                                                                @elseif($i > 23)
+                                                                                    <u
+                                                                                        class="ml-2">น้ำหนักเกิน</u>
+                                                                                @elseif($i > 25)
+                                                                                    <u
+                                                                                        class="ml-2">โรคอ้วน</u>
+                                                                                @elseif($i > 30)
+                                                                                    <u
+                                                                                        class="ml-2">โรคอ้วนอันตราย</u>
+                                                                                @else
+                                                                                    <u
+                                                                                        class="ml-2">ไม่สามารถคำนวนได้</u>
+                                                                                @endif
+
+                                                                            </div>
                                                                         @else
                                                                             <div class="col-2">
                                                                                 <label>รหัส</label>
@@ -118,7 +155,7 @@
                                                                                     class="ml-2">{{ $gender }}</u>
 
                                                                             </div>
-                                                                            <div class="col-2">
+                                                                            {{-- <div class="col-2">
                                                                                 <label>ระดับชั้น</label>
                                                                                 <u
                                                                                     class="ml-2">{{ $level }}</u>
@@ -136,7 +173,7 @@
                                                                                 <u
                                                                                     class="ml-2">{{ $program }}</u>
 
-                                                                            </div>
+                                                                            </div> --}}
 
                                                                             <div class="col-2">
                                                                                 <label>น้ำหนัก</label>
@@ -150,6 +187,42 @@
                                                                                     class="ml-2">{{ $height }}</u>
 
                                                                             </div>
+
+                                                                            <div class="col-2">
+                                                                                <label>ค่า BMI</label>
+                                                                                @php
+                                                                                    $h = $height / 100;
+                                                                                    $h1 = $h ^ 2;
+                                                                                    $i = $weight / $h1;
+                                                                                @endphp
+                                                                                <u
+                                                                                    class="ml-2">{{ $i }}</u>
+
+                                                                            </div>
+
+                                                                            <div class="col-2">
+                                                                                <label>อยู่ในเกณท์</label>
+                                                                                @if ($i < 18.5)
+                                                                                    <u
+                                                                                        class="ml-2">น้ำหนักต่ำกว่าปกติ</u>
+                                                                               @elseif ($i >= 18.5)
+                                                                                    <u
+                                                                                        class="ml-2">สมส่วน</u>
+                                                                                @elseif($i >= 23)
+                                                                                    <u
+                                                                                        class="ml-2">น้ำหนักเกิน</u>
+                                                                                @elseif($i >= 25)
+                                                                                    <u
+                                                                                        class="ml-2">โรคอ้วน</u>
+                                                                                @elseif($i >= 30)
+                                                                                    <u
+                                                                                        class="ml-2">โรคอ้วนอันตราย</u>
+                                                                                @else
+                                                                                    <u
+                                                                                        class="ml-2">ไม่สามารถคำนวนได้</u>
+                                                                                @endif
+
+                                                                            </div>
                                                                         @endif
 
                                                                     </div>
@@ -161,66 +234,7 @@
                                                                     <div class="card-body">
                                                                         <div class="form-group">
                                                                             <div class="row">
-                                                                                <form wire:submit.prevent="save">
-                                                                                    <div class="modal-body">
-                                                                                        <div class="card-body">
-                                                                                            <div class="form-group">
-                                                                                                <div class="row">
-
-
-
-                                                                                                        {{-- <label>รหัส</label> --}}
-                                                                                                        <input wire:model="guest_id" type="hidden" class="form-control"
-                                                                                                            placeholder="กรอกรหัสประจำตัว">
-                                                                                                        {{-- @error('guest_id')<p class="text-danger">{{$message}}</p>
-                                                                                                        @enderror --}}
-
-
-
-                                                                                                    <div class="col-4">
-                                                                                                        <label>อาการ</label>
-                                                                                                        <input wire:model="symptom" type="text" class="form-control"
-                                                                                                            placeholder="กรอกอาการ">
-                                                                                                        @error('symptom')<p class="text-danger">{{$message}}</p>
-                                                                                                        @enderror
-
-                                                                                                    </div>
-                                                                                                    <div class="col-4">
-                                                                                                        <label>การปฐมพยาบาล</label>
-                                                                                                        <input wire:model="medical" type="text"
-                                                                                                            class="form-control" placeholder="กรอกการปฐมพยาบาล">
-                                                                                                        @error('medical')<p class="text-danger">{{$message}}</p>
-                                                                                                        @enderror
-
-                                                                                                    </div>
-                                                                                                    <div class="col-4">
-                                                                                                        <label>กรอกยาที่ใช้</label>
-                                                                                                        <input wire:model="medicine" type="text"
-                                                                                                            class="form-control" placeholder="กรอกกรอกยาที่ใช้">
-                                                                                                        @error('medicine')<p class="text-danger">{{$message}}</p>
-                                                                                                        @enderror
-
-                                                                                                    </div>
-                                                                                                    <div class="col-4">
-                                                                                                        <label>หมายเหตุ</label>
-                                                                                                        <input wire:model="note" type="text"
-                                                                                                            class="form-control" placeholder="กรอกหมายเหตุ">
-                                                                                                        @error('note')<p class="text-danger">{{$message}}</p>
-                                                                                                        @enderror
-
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!-- /.card-body -->
-
-                                                                                    </div>
-                                                                                    <div class="modal-footer justify-content-between">
-                                                                                        <button type="button" class="btn btn-default"
-                                                                                            data-dismiss="modal">Close</button>
-                                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                                                    </div>
-                                                                                </form>
+                                                                                @include('livewire.workspace.form')
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -239,11 +253,15 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($datahistry as $item)
-
                                                                             <tr>
                                                                                 <td>{{ $loop->iteration ?? '' }}</td>
                                                                                 <td>{{ $item->symptom ?? '' }}</td>
-                                                                                <td>{{ $item->medical ?? '' }}</td>
+                                                                                {{-- <td>{{ $item->medical ?? '' }}</td> --}}
+                                                                                <td>
+                                                                                    @foreach ($item->medical as $items)
+                                                                                        {{ $items }}
+                                                                                    @endforeach
+                                                                                </td>
                                                                                 <td>{{ $item->medicine ?? '' }}</td>
                                                                                 <td>{{ $item->created_at ?? '' }}
                                                                                 </td>
@@ -342,6 +360,10 @@
                         <div class="mt-3">
                             {{ $guest->links() }}
                         </div>
+
+                        @else
+
+                        @endif
 
                     </div>
                 </div>

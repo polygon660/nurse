@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\history;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 
 
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+// Route::view('/','auth.login')->name('login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    Route::view('/dashboard', 'pages.dashboard.dashboard')->name('dashboard');
+    // Route::view('/dashboard', 'pages.dashboard.dashboard')->name('dashboard');
+    Route::prefix('workspace')->name('workspace.')->group(function () {
+        $workspace = "pages.workspace.";
+        Route::view('/index', $workspace . 'workspace')->name('workspaces');
+    });
 
     Route::prefix('setting')->name('setting.')->group(function () {
         $setting = "pages.setting.";
@@ -47,4 +56,23 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         $historyboard = "pages.historyboard.";
         Route::view('/index', $historyboard . 'historyboard')->name('historyboard');
     });
+
+
+    Route::resource(
+        '/classroom/{classroom}/student',
+        \App\Http\Controllers\classroom\StudentController::class
+    )->names('classroom.student');
+
+    Route::resource(
+        '/non-register/student',
+        \App\Http\Controllers\NonRegister\StudentController::class
+    )->names('non-register.student');
+
+    // Export
+
+
+    // Route::view('/export/history/excel','export.HistoryExcel',['data' => history::with('guest')->get()]);
+
+
+
 });

@@ -51,11 +51,11 @@ class Saveform extends Component
                 'height' => $this->input_height,
             ]);
             $this->reset();
-            // $this->dispatchBrowserEvent('swal:modal', [
-            //     'type' => 'success',
-            //     'title' => 'สำเร็จ!!',
-            //     'text' => 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว'
-            // ]);
+            $this->dispatchBrowserEvent('swal:modal', [
+                'type' => 'success',
+                'title' => 'สำเร็จ!!',
+                'text' => 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว'
+            ]);
             return redirect()->to('registryguest/index')->with('message', 'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว');
 
         } catch (\Exception $e) {
