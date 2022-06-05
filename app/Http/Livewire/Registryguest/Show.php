@@ -117,7 +117,7 @@ class Show extends Component
 
     public function render()
     {
-        $data = guest::with(['guest_type','prefix','level','room','program'])->get();
+        $data = guest::with(['guest_type','prefix','level','room','program'])->with('student')->get();
         $datahistry = history::where('guest_id',$this->guest_id)->get();
         $type = guest_type::all();
         $prefix = prefix::all();

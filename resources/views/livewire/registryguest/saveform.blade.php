@@ -21,9 +21,11 @@
                                 <label>ประเภทผู้เข้าใช้</label>
                                 <select class="form-control" wire:model="input_type">
                                     <option selected>กรุณาเลือกประเภท</option>
-                                    @foreach ($type as $item)
+                                    {{-- @foreach ($type as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
+                                    <option value="1">บุคคลภายนอก</option>
+                                    <option value="2">บุคลากรภายใน</option>
 
                                 </select>
                                 @error('input_type')<p class="text-danger">{{ $message }}</p>@enderror

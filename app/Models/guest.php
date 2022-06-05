@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Register\Students;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -53,6 +54,11 @@ class guest extends Model
     public function program()
     {
         return $this->belongsTo(program::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Students::class,'code','register_id');
     }
 
     // public function students()

@@ -11,7 +11,7 @@
                 <th class="text-center">รหัส</th>
                 <th class="text-center">ชื่อ-สกุล</th>
                 <th class="text-center">ระดับชั้น</th>
-                <th class="text-center">ห้อง</th>
+                {{-- <th class="text-center">ห้อง</th> --}}
                 <th class="text-center">สาขา</th>
                 <th class="text-center">บันทึกเมื่อ</th>
                 <th class="text-center">จัดการ</th>
@@ -19,14 +19,27 @@
         </thead>
         <tbody>
             @forelse ($data as $item)
-                <tr>
+                <tr class="text-center">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->guest_type->name }}</td>
-                    <td>{{ $item->code ?? '' }}</td>
-                    <td>{{ $item->prefix->name . '' . $item->name . ' ' . $item->surname }}</td>
-                    <td>{{ $item->level->name ?? '' }}</td>
-                    <td>{{ $item->room->name ?? '' }}</td>
-                    <td>{{ $item->program->name ?? '' }}</td>
+                    <td>
+                        @if ($item->guest_type->name == 'นักเรียน/นักศึกษา')
+                            {{ $item->student->student_id ?? '' }}
+                        @else
+                        {{ $item->code ?? ''}}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($item->guest_type->name == 'นักเรียน/นักศึกษา')
+                            {{ $item->student->national->fullname ?? '' }}
+                        @else
+                            {{ $item->prefix->name . '' . $item->name . ' ' . $item->surname }}
+                        @endif
+
+                    </td>
+                    <td>{{ $item->student->classroom->classname  ?? '' }}</td>
+                    {{-- <td>{{ $item->room->name ?? '' }}</td>--}}
+                    <td>{{ $item->student->courseOpen->subMajor->sub_major_short_name?? '' }}</td> 
                     <td>{{ $item->updated_at ?? '' }}</td>
                     <td class="text-center">
 
@@ -48,6 +61,7 @@
                     </td>
                 </tr>
             @empty
+            <td colspan="8">ไม่พบข้อมูล</td>
             @endforelse
 
             <!-- /.modal -->
@@ -226,9 +240,9 @@
                 <th class="text-center">ประเภทผู้เข้าใช้</th>
                 <th class="text-center">รหัส</th>
                 <th class="text-center">ชื่อ-สกุล</th>
-                {{-- <th class="text-center">ระดับชั้น</th>
-                <th class="text-center">ห้อง</th>
-                <th class="text-center">สาขา</th> --}}
+               <th class="text-center">ระดับชั้น</th>
+                 {{-- <th class="text-center">ห้อง</th>--}}
+                <th class="text-center">สาขา</th> 
                 <th class="text-center">บันทึกเมื่อ</th>
                 <th class="text-center">จัดการ</th>
             </tr>

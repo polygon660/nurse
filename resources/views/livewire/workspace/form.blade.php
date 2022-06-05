@@ -7,7 +7,8 @@
 
 
                     {{-- <label>รหัส</label> --}}
-                    <input wire:model="guest_id" type="hidden" class="form-control" placeholder="กรอกรหัสประจำตัว">
+                    <input wire:model="code" type="text" class="form-control" placeholder="กรอกรหัสประจำตัว">
+                    <input wire:model="guest_id" type="text" class="form-control" placeholder="กรอกรหัสประจำตัว">
                     {{-- @error('guest_id')<p class="text-danger">{{$message}}</p>
                         @enderror --}}
 
@@ -72,7 +73,7 @@
 
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Closse</button> --}}
         <button type="submit" class="btn btn-primary">Save
             changes</button>
     </div>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Historyboard;
 
+use App\Exports\HistoryExport;
 use App\Models\guest;
 use App\Models\history;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Show extends Component
 {
@@ -35,7 +37,10 @@ class Show extends Component
         $this->height = $key->height;
 
     }
-
+    public function export()
+    {
+        return Excel::download(new HistoryExport, 'invoices.xlsx');
+    }
 
     public function render()
     {
@@ -48,7 +53,9 @@ class Show extends Component
                             ->orwhere('surname', 'like', '%' . $this->search . '%')
                             ->orwhere('code', 'like', '%' . $this->search . '%');
                     });
-                })->paginate(10),
+                })
+                ->orderBy('created_at','desc')
+                ->paginate(10),
             'datahistry' => history::where('guest_id', $this->guest_id)->paginate(10)
         ]);
     }

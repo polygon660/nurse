@@ -107,12 +107,12 @@
                                     <td align="center"> {{ $classroom->classname }} </td>
                                     <td align="center"> {{ $classroom->round->round_name }} </td>
                                     <td align="center"> {{ $classroom->subMajor->sub_major_short_name }} </td>
-                                    <!-- <td align="center">
+                                    {{-- <td align="center">
                                             <button
                                                 class="btn btn-sm btn-{{ $classroom->ratio_product_status->value }}">
                                                 {{ $classroom->ratio_product_status->message }}
                                             </button>
-                                        </td> -->
+                                        </td>  --}}
                                     <td align="center">
                                         <a href="{{ route('classroom.student.index', $classroom->classroom_id) }}">
                                             <button class="btn btn-primary">ดูข้อมูล</button>

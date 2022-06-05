@@ -1,6 +1,9 @@
 <div>
     <div class="card-body">
         <input type="text" class="form-control mb-3" wire:model="search" placeholder="ค้นหาชื่อ, นามสกุล, รหัสประจำตัว">
+        <a href="#" wire:click="export()" class="btn btn-success mb-3">
+            EXCEL
+        </a>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -19,9 +22,25 @@
                 @forelse ( $data as $item )
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->guest->prefix->name . $item->guest->name . ' ' . $item->guest->surname ?? '' }}
+                        <td>
+                            {{-- @if ($item->guest->guest_type->name == 'นักเรียน/นักศึกษา') --}}
+                                {{ $item->guest->student->national->fullname ?? '' }}
+                            {{-- @else
+                                {{ $item->prefix->name . '' . $item->name . ' ' . $item->surname }}
+                            @endif --}}
+    
                         </td>
-                        <td>{{ $item->guest->guest_type->name }}</td>
+                        {{-- <td>
+                            @if ($item->guest->guest_type->name == 'นักเรียน/นักศึกษา')
+                            {{ $item->student->student_id ?? '' }}
+                            @else
+                            {{ $item->code ?? ''}}
+                            @endif
+                        </td> --}}
+                        {{-- <td>{{ $item->guest->guest_type->name }}</td>    --}}
+                       
+                        {{-- <td>{{ $item->guest->prefix->name . $item->guest->name . ' ' . $item->guest->surname ?? '' }}
+                        </td> --}}
                         <td>{{ $item->symptom }}</td>
                         {{-- <td>{{ $item->medical }}</td> --}}
                         <td>

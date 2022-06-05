@@ -19,7 +19,15 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item->guest->guest_type->name }}</td>
             <td>{{ $item->guest->code ?? '-' }}</td>
-            <td>{{ $item->guest->full_name }}</td>
+            {{-- <td>{{ $item->guest->full_name }}</td> --}}
+            <td>
+                @if ($item->guest->guest_type->name == 'นักเรียน/นักศึกษา')
+                    {{ $item->guest->student->national->fullname ?? '' }}
+                @else
+                    {{ $item->prefix->name . '' . $item->name . ' ' . $item->surname }}
+                @endif
+            </td>
+
             <td>{{ $item->symptom }}</td>
             {{-- <td>{{ $item->medical }}</td> --}}
             <td>

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/test','test')->name('test');
 
 
 // Route::get('/', function () {
